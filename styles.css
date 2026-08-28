@@ -629,34 +629,17 @@ body {
   position: relative;
   width: 170px;
   height: 170px;
-  border: 3px solid var(--navy);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  color: var(--navy);
-  text-align: center;
-  font-weight: 800;
-  letter-spacing: 1.2px;
   margin-bottom: 8px;
 }
 
-.stamp-wrap::before,
-.stamp-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 16px;
-  border: 2px solid rgba(15, 60, 103, 0.6);
-  border-radius: 50%;
-}
-
-.company-stamp {
-  font-size: 1.05rem;
-}
-
-.company-stamp.small {
-  font-size: 0.66rem;
+.stamp-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .signature-box {
