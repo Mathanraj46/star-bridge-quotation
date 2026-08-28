@@ -36,6 +36,7 @@ body {
 .quotation-sheet {
   width: 100%;
   background: #fff;
+  overflow: hidden;
   border: 1px solid #fcfdfe;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
   padding: 0;
