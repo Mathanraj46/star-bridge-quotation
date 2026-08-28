@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Bridge Quotation</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div id="quotation-sheet" class="quotation-sheet">
+        <header class="top-header">
+          <div class="brand-block">
+            <div class="brand-icon">
+              <img src="ChatGPT Image Aug 28, 2026, 10_53_26 PM.png" alt="Star Bridge General Maintenance logo" />
+            </div>
+            <div class="brand-copy">
+              <h1>STAR BRIDGE</h1>
+              <h2>GENERAL MAINTENANCE</h2>
+              <h1>صيانة عامة ستار بريدج</h1>
+            </div>
+          </div>
+
+          <div class="header-quote">
+            <h3>QUOTATION</h3>
+            <div class="quote-meta">
+              <span>Quotation No</span>
+              <input type="text" class="quote-meta-input" placeholder="Enter quotation no." aria-label="Quotation number" />
+            </div>
+            <div class="quote-meta">
+              <span>Date</span>
+              <input type="text" class="quote-meta-input" placeholder="DD-MM-YYYY" aria-label="Quotation date" />
+            </div>
+          
+          </div>
+        </header>
+
+        <section class="info-row">
+          <div class="contact-card">
+            <div class="contact-line">
+              <span class="icon">☎</span>
+              <span>050-1667520</span>
+            </div>
+            <div class="contact-line">
+              <span class="icon">✉</span>
+              <span>rajuliwa7520@gmail.com</span>
+            </div>
+            <div class="contact-line">
+              <span class="icon">◉</span>
+              <span>Abu Dhabi - U.A.E.</span>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="client-section">
+          <div class="client-header">
+            <label>To,</label>
+          </div>
+          <input type="text" class="client-name" placeholder="Enter customer name" aria-label="Customer name" />
+          <div class="client-meta">
+            <div class="meta-row">
+              <label class="meta-label" for="workLocation">Work Area / Location</label>
+              <span class="meta-colon">:</span>
+              <input id="workLocation" type="text" class="location-input" placeholder="Enter work area or location" aria-label="Work area or location" />
+            </div>
+          </div>
+
+        
+        </section>
+
+        <div class="table-controls">
+          <button id="addRowBtn" class="action-btn primary-btn" type="button">Add Row</button>
+          <button id="downloadPdfBtn" class="action-btn secondary-btn" type="button">Download PDF</button>
+        </div>
+
+        <section class="estimate-table-wrap">
+          <table class="estimate-table">
+            <thead>
+              <tr>
+                <th style="width: 7%;">S.No</th>
+                <th style="width: 35%;">Description of Work</th>
+                <th style="width: 12%;">Qty</th>
+                <th style="width: 18%;">Unit Prize</th>
+                <th style="width: 18%;">Amount (AED)</th>
+                <th class="action-col" style="width: 10%;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTableBody"></tbody>
+          </table>
+        </section>
+
+        <div class="totals-area">
+          <div class="total-line">
+            <span>Total (in words)</span>
+            <strong id="totalWords">Fifteen Lakh Fifty Thousand Only</strong>
+          </div>
+
+          <div class="amount-box">
+            <div class="amount-row">
+              <span>Sub Total</span>
+              <strong id="subtotalValue">1,435,000.00</strong>
+            </div>
+            <div class="amount-row">
+              <span>Advance</span>
+              <input id="advanceValue" class="advance-input" type="number" min="0" step="0.01" placeholder="Enter advance" aria-label="Advance amount" />
+            </div>
+            <div class="amount-row balance-row">
+              <span>Balance (AED)</span>
+              <strong id="balanceValue">1,435,000.00</strong>
+            </div>
+          </div>
+        </div>
+
+        <footer class="bottom-section">
+          <div class="terms-area">
+            <h4>Terms &amp; Conditions :</h4>
+            <ul>
+              <li>This quotation is valid for 30 days from the date of issue.</li>
+              <li>50% advance before starting the work.</li>
+              <li>40% on completion of structural work.</li>
+              <li>10% after final handover.</li>
+              <li>Any additional work will be charged extra.</li>
+              <li>Material quality as per standard specifications.</li>
+              <li>Time of completion: 6 – 7 Months (approx.).</li>
+            </ul>
+          </div>
+
+          <div class="signature-area">
+            <div class="stamp-wrap">
+              <div class="company-stamp">STAR BRIDGE</div>
+              <div class="company-stamp small">GENERAL MAINTENANCE</div>
+            </div>
+            <div class="signature-box">
+              <div class="signature-name">R. Mathan</div>
+              <div class="signature-label">Authorized Signatory</div>
+            </div>
+          </div>
+        </footer>
+
+        <div class="footer-bar">Thank you for the opportunity to quote.</div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
