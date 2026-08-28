@@ -183,26 +183,35 @@ downloadPdfBtn.addEventListener('click', async () => {
       scale: 1,
       backgroundColor: '#ffffff',
       useCORS: false,
+      width: element.scrollWidth,
+      height: element.scrollHeight,
+      windowWidth: document.documentElement.scrollWidth,
+      windowHeight: document.documentElement.scrollHeight,
       scrollX: 0,
       scrollY: 0,
     });
 
-    const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    let position = 0;
+    const pagePixelHeight = Math.floor((pageHeight * canvas.width) / pdfWidth);
 
-    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight, undefined, 'FAST');
-    heightLeft -= pageHeight;
+    for (let sourceY = 0, pageIndex = 0; sourceY < canvas.height; sourceY += pagePixelHeight, pageIndex += 1) {
+      const sliceHeight = Math.min(pagePixelHeight, canvas.height - sourceY);
+      const pageCanvas = document.createElement('canvas');
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = sliceHeight;
+      const pageContext = pageCanvas.getContext('2d');
+      pageContext.fillStyle = '#ffffff';
+      pageContext.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
+      pageContext.drawImage(canvas, 0, sourceY, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
 
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight, undefined, 'FAST');
-      heightLeft -= pageHeight;
+      if (pageIndex > 0) {
+        pdf.addPage();
+      }
+
+      const pageImageHeight = (sliceHeight * pdfWidth) / canvas.width;
+      pdf.addImage(pageCanvas.toDataURL('image/png'), 'PNG', 0, 0, pdfWidth, pageImageHeight, undefined, 'FAST');
     }
 
     pdf.save('star-bridge-quotation.pdf');
