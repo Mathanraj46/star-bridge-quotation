@@ -47,6 +47,28 @@ body {
   display: none !important;
 }
 
+.pdf-export-mode {
+  padding: 0 !important;
+}
+
+.pdf-export-mode .page-shell {
+  width: 100% !important;
+}
+
+.pdf-export-mode .quotation-sheet {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.pdf-export-mode .brand-icon img,
+.pdf-export-mode .stamp-wrap img,
+.pdf-export-mode .signature-image {
+  display: block !important;
+  max-width: none !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 .export-input-value {
   display: block;
   overflow: hidden;

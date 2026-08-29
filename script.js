@@ -180,13 +180,15 @@ downloadPdfBtn.addEventListener('click', async () => {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     const canvas = await html2canvas(element, {
-      scale: 1,
+      scale: 2,
       backgroundColor: '#ffffff',
-      useCORS: false,
-      width: element.clientWidth,
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      width: element.scrollWidth,
       height: element.scrollHeight,
-      windowWidth: element.clientWidth,
-      windowHeight: document.documentElement.scrollHeight,
+      windowWidth: element.scrollWidth,
+      windowHeight: element.scrollHeight,
       scrollX: 0,
       scrollY: 0,
     });
@@ -194,7 +196,7 @@ downloadPdfBtn.addEventListener('click', async () => {
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const pagePixelHeight = Math.floor((pageHeight * canvas.width) / pdfWidth);
+    const pagePixelHeight = Math.max(1, Math.floor((pageHeight * canvas.width) / pdfWidth));
 
     for (let sourceY = 0, pageIndex = 0; sourceY < canvas.height; sourceY += pagePixelHeight, pageIndex += 1) {
       const sliceHeight = Math.min(pagePixelHeight, canvas.height - sourceY);
