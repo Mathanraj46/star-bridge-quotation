@@ -60,6 +60,18 @@ body {
   border: none !important;
 }
 
+.pdf-export-mode .top-header {
+  background: #f3f3f3 !important;
+  overflow: visible !important;
+}
+
+.pdf-export-mode .header-quote {
+  clip-path: none !important;
+  padding-left: 26px !important;
+  margin-left: 0 !important;
+  min-width: 320px !important;
+}
+
 .pdf-export-mode .brand-icon img,
 .pdf-export-mode .stamp-wrap img,
 .pdf-export-mode .signature-image {
