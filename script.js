@@ -154,41 +154,36 @@ downloadPdfBtn.addEventListener('click', async () => {
 
   const { jsPDF } = window.jspdf;
   const element = document.getElementById('quotation-sheet');
-  const inputElements = [...element.querySelectorAll('input')];
-  const imageElements = window.location.protocol === 'file:'
-    ? [...element.querySelectorAll('img')]
-    : [];
-  const exportValues = inputElements.map((input) => {
-    const value = input.value || input.placeholder || '';
-    const text = document.createElement('span');
-    text.className = `export-input-value ${input.className}`;
-    text.textContent = value;
-    input.replaceWith(text);
-    return { input, text };
-  });
-  const exportImages = imageElements.map((image) => {
-    const placeholder = document.createElement('span');
-    placeholder.className = 'export-image-placeholder';
-    placeholder.style.cssText = `display: block; width: ${image.clientWidth}px; height: ${image.clientHeight}px;`;
-    image.replaceWith(placeholder);
-    return { image, placeholder };
-  });
+  const exportRoot = element.cloneNode(true);
+  exportRoot.style.position = 'fixed';
+  exportRoot.style.left = '-99999px';
+  exportRoot.style.top = '0';
+  exportRoot.style.visibility = 'hidden';
+  exportRoot.style.pointerEvents = 'none';
+  exportRoot.classList.add('pdf-export-mode');
+  document.body.appendChild(exportRoot);
 
-  setPdfExportMode(true);
+  const exportInputs = exportRoot.querySelectorAll('input');
+  exportInputs.forEach((input) => {
+    const value = input.value || input.placeholder || '';
+    input.setAttribute('value', value);
+    input.value = value;
+    input.setAttribute('placeholder', input.placeholder || '');
+  });
 
   try {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    const canvas = await html2canvas(element, {
+    const canvas = await html2canvas(exportRoot, {
       scale: 2,
       backgroundColor: '#ffffff',
       useCORS: true,
       allowTaint: true,
       logging: false,
-      width: element.scrollWidth,
-      height: element.scrollHeight,
-      windowWidth: element.scrollWidth,
-      windowHeight: element.scrollHeight,
+      width: exportRoot.scrollWidth,
+      height: exportRoot.scrollHeight,
+      windowWidth: exportRoot.scrollWidth,
+      windowHeight: exportRoot.scrollHeight,
       scrollX: 0,
       scrollY: 0,
     });
@@ -221,8 +216,7 @@ downloadPdfBtn.addEventListener('click', async () => {
     console.error('PDF generation failed:', error);
     alert(`PDF download failed: ${error.message || 'Please try again.'}`);
   } finally {
-    exportImages.forEach(({ image, placeholder }) => placeholder.replaceWith(image));
-    exportValues.forEach(({ input, text }) => text.replaceWith(input));
+    exportRoot.remove();
     setPdfExportMode(false);
   }
 });
