@@ -119,8 +119,8 @@ body {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background: #f3f3f3;
-  min-height: 180px;
+  background: #ececec;
+  min-height: 170px;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -131,22 +131,20 @@ body {
   gap: 18px;
   flex: 1 1 auto;
   min-width: 0;
-  padding: 14px 18px 14px 18px;
-  background: #f3f3f3;
+  padding: 18px 20px 18px 18px;
+  background: #f4f4f4;
+  min-height: 170px;
 }
 
 .brand-icon {
-  flex: 0 0 170px;
-  width: 170px;
-  height: 140px;
-  background: #fff;
-  border: 1px solid rgba(11, 45, 82, 0.08);
-  box-shadow: 0 1px 0 rgba(11, 45, 82, 0.06);
+  flex: 0 0 150px;
+  width: 150px;
+  height: 120px;
+  background: transparent;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
 }
 
 .brand-icon img {
@@ -202,25 +200,25 @@ body {
 .brand-copy h1 {
   margin: 0;
   font-weight: 900;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   color: var(--navy);
-  font-size: clamp(2.5rem, 3.7vw, 5.2rem);
+  font-size: clamp(2.2rem, 3vw, 4.8rem);
   line-height: 1;
 }
 
 .brand-copy h2 {
   margin: 0;
   color: var(--navy);
-  font-size: clamp(1.1rem, 1.5vw, 2.1rem);
+  font-size: clamp(1rem, 1.5vw, 2rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .brand-copy h1:last-child {
   max-width: 100%;
-  font-size: clamp(1.55rem, 2.3vw, 2.8rem);
-  line-height: 1.15;
+  font-size: clamp(1.3rem, 2vw, 2.6rem);
+  line-height: 1.1;
   overflow-wrap: anywhere;
   font-weight: 700;
   margin-top: 2px;
@@ -247,18 +245,18 @@ body {
 .header-quote {
   background: var(--navy);
   color: #fff;
-  padding: 26px 28px 18px 60px;
+  padding: 20px 28px 18px 52px;
   min-width: 390px;
-  flex: 0 0 42%;
+  flex: 0 0 40%;
   position: relative;
   margin-left: 10px;
-  clip-path: polygon(11% 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
   box-sizing: border-box;
 }
 
 .header-quote h3 {
   margin: 0 0 20px;
-  font-size: clamp(2.4rem, 3vw, 4rem);
+  font-size: clamp(2.3rem, 2.9vw, 4rem);
   font-weight: 800;
   letter-spacing: 2px;
   text-align: center;
@@ -268,7 +266,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
   font-size: 1.05rem;
   margin-bottom: 10px;
   color: rgba(255, 255, 255, 0.96);
