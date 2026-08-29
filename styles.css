@@ -85,25 +85,25 @@ body {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #f3f3f3 0%, #f3f3f3 62%, var(--navy) 62%, var(--navy) 100%);
-  padding: 18px 0 18px 18px;
-  min-height: 170px;
+  background: #f4f4f4;
+  min-height: 180px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .brand-block {
   display: flex;
   align-items: center;
-  gap: 22px;
-  flex: 1;
+  gap: 18px;
+  flex: 1 1 auto;
   min-width: 0;
-  padding: 8px 12px;
+  padding: 18px 18px 18px 24px;
 }
 
 .brand-icon {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 150px;
+  flex: 0 0 170px;
+  width: 170px;
+  height: 130px;
   background: transparent;
   position: relative;
   display: flex;
@@ -163,26 +163,27 @@ body {
 .brand-copy h1 {
   margin: 0;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: 0.04em;
   color: var(--navy);
-  font-size: clamp(2.2rem, 2.8vw, 3.7rem);
+  font-size: clamp(2.2rem, 2.9vw, 4rem);
   line-height: 1;
 }
 
 .brand-copy h2 {
   margin: 0;
   color: var(--navy);
-  font-size: clamp(1.05rem, 1.35vw, 1.9rem);
+  font-size: clamp(1rem, 1.35vw, 1.8rem);
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .brand-copy h1:last-child {
   max-width: 100%;
-  font-size: clamp(1.5rem, 2vw, 2.5rem);
+  font-size: clamp(1.5rem, 2vw, 2.6rem);
   line-height: 1.1;
   overflow-wrap: anywhere;
+  font-weight: 700;
 }
 
 .brand-divider {
@@ -206,18 +207,18 @@ body {
 .header-quote {
   background: var(--navy);
   color: #fff;
-  padding: 28px 30px 18px 56px;
+  padding: 24px 26px 18px 52px;
   min-width: 360px;
-  flex: 0 1 400px;
+  flex: 0 0 38%;
   position: relative;
-  margin-left: 15px;
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  margin-left: 12px;
+  clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
   box-sizing: border-box;
 }
 
 .header-quote h3 {
   margin: 0 0 18px;
-  font-size: 2.4rem;
+  font-size: clamp(2.1rem, 2.5vw, 3.2rem);
   font-weight: 800;
   letter-spacing: 2px;
   text-align: center;
@@ -228,9 +229,9 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  font-size: 1.03rem;
+  font-size: 1.08rem;
   margin-bottom: 10px;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .quote-meta-input {
