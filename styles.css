@@ -67,9 +67,52 @@ body {
 
 .pdf-export-mode .header-quote {
   clip-path: none !important;
-  padding-left: 26px !important;
+  padding: 12px 18px 10px 22px !important;
   margin-left: 0 !important;
-  min-width: 320px !important;
+  min-width: 260px !important;
+  flex: 0 0 38% !important;
+}
+
+.pdf-export-mode .top-header {
+  min-height: 120px !important;
+  padding: 0 !important;
+}
+
+.pdf-export-mode .brand-block {
+  padding: 8px 10px !important;
+  min-height: 120px !important;
+}
+
+.pdf-export-mode .brand-icon {
+  width: 90px !important;
+  height: 80px !important;
+  flex-basis: 90px !important;
+}
+
+.pdf-export-mode .brand-copy h1 {
+  font-size: 26px !important;
+  line-height: 1.1 !important;
+}
+
+.pdf-export-mode .brand-copy h2 {
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+}
+
+.pdf-export-mode .brand-copy h1:last-child {
+  font-size: 18px !important;
+  line-height: 1.1 !important;
+}
+
+.pdf-export-mode .quote-meta {
+  gap: 10px !important;
+  margin-bottom: 6px !important;
+  font-size: 11px !important;
+}
+
+.pdf-export-mode .quote-meta-input {
+  width: 110px !important;
+  font-size: 11px !important;
 }
 
 .pdf-export-mode .brand-icon img,
