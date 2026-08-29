@@ -19,20 +19,6 @@ const advanceInput = document.getElementById('advanceValue');
 
 function setPdfExportMode(isExporting) {
   document.body.classList.toggle('pdf-export-mode', isExporting);
-  document.body.style.background = isExporting ? '#ffffff' : '';
-  document.body.style.padding = isExporting ? '0' : '';
-  document.body.style.margin = isExporting ? '0' : '';
-
-  const sheet = document.querySelector('.quotation-sheet');
-  if (sheet) {
-    sheet.style.background = isExporting ? '#ffffff' : '';
-  }
-
-  const shell = document.querySelector('.page-shell');
-  if (shell) {
-    shell.style.background = isExporting ? '#ffffff' : '';
-    shell.style.boxShadow = isExporting ? 'none' : '';
-  }
 }
 
 function formatCurrency(value) {
@@ -168,22 +154,30 @@ downloadPdfBtn.addEventListener('click', async () => {
 
   const { jsPDF } = window.jspdf;
   const element = document.getElementById('quotation-sheet');
-  const pageShell = document.querySelector('.page-shell');
-  const originalBodyBg = document.body.style.background;
-  const originalBodyPadding = document.body.style.padding;
-  const originalBodyOverflow = document.body.style.overflow;
-  const originalShellBg = pageShell ? pageShell.style.background : '';
-  const originalSheetBg = element.style.background;
+  const inputElements = [...element.querySelectorAll('input')];
+  const imageElements = window.location.protocol === 'file:'
+    ? [...element.querySelectorAll('img')]
+    : [];
+  const exportValues = inputElements.map((input) => {
+    const value = input.value || input.placeholder || '';
+    const text = document.createElement('span');
+    text.className = `export-input-value ${input.className}`;
+    text.textContent = value;
+    input.replaceWith(text);
+    return { input, text };
+  });
+  const exportImages = imageElements.map((image) => {
+    const placeholder = document.createElement('span');
+    placeholder.className = 'export-image-placeholder';
+    placeholder.style.cssText = `display: block; width: ${image.clientWidth}px; height: ${image.clientHeight}px;`;
+    image.replaceWith(placeholder);
+    return { image, placeholder };
+  });
 
-  document.body.style.background = '#ffffff';
-  document.body.style.padding = '0';
-  document.body.style.overflow = 'visible';
-  if (pageShell) pageShell.style.background = '#ffffff';
-  element.style.background = '#ffffff';
   setPdfExportMode(true);
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 80));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     const canvas = await html2canvas(element, {
       scale: 2,
@@ -200,39 +194,23 @@ downloadPdfBtn.addEventListener('click', async () => {
     });
 
     const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const pagePixelHeight = Math.max(1, Math.floor((pageHeight * canvas.width) / pdfWidth));
+    const pdfWidth = pdf.internal.pageSize.getWidth() - 12;
+    const pdfHeight = pdf.internal.pageSize.getHeight() - 12;
+    const ratio = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
+    const imgWidth = canvas.width * ratio;
+    const imgHeight = canvas.height * ratio;
+    const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
+    const y = (pdf.internal.pageSize.getHeight() - imgHeight) / 2;
 
-    for (let sourceY = 0, pageIndex = 0; sourceY < canvas.height; sourceY += pagePixelHeight, pageIndex += 1) {
-      const sliceHeight = Math.min(pagePixelHeight, canvas.height - sourceY);
-      const pageCanvas = document.createElement('canvas');
-      pageCanvas.width = canvas.width;
-      pageCanvas.height = sliceHeight;
-      const pageContext = pageCanvas.getContext('2d');
-      pageContext.fillStyle = '#ffffff';
-      pageContext.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
-      pageContext.drawImage(canvas, 0, sourceY, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
-
-      if (pageIndex > 0) {
-        pdf.addPage();
-      }
-
-      const pageImageHeight = (sliceHeight * pdfWidth) / canvas.width;
-      pdf.addImage(pageCanvas.toDataURL('image/png'), 'PNG', 0, 0, pdfWidth, pageImageHeight, undefined, 'FAST');
-    }
-
+    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', x, y, imgWidth, imgHeight, undefined, 'FAST');
     pdf.save('star-bridge-quotation.pdf');
   } catch (error) {
     console.error('PDF generation failed:', error);
     alert(`PDF download failed: ${error.message || 'Please try again.'}`);
   } finally {
+    exportImages.forEach(({ image, placeholder }) => placeholder.replaceWith(image));
+    exportValues.forEach(({ input, text }) => text.replaceWith(input));
     setPdfExportMode(false);
-    document.body.style.background = originalBodyBg;
-    document.body.style.padding = originalBodyPadding;
-    document.body.style.overflow = originalBodyOverflow;
-    if (pageShell) pageShell.style.background = originalShellBg;
-    element.style.background = originalSheetBg;
   }
 });
 
