@@ -85,29 +85,30 @@ body {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #f1f1f1 0%, #f1f1f1 60%, var(--navy) 60%, var(--navy) 100%);
-  padding: 28px 30px 22px;
+  background: linear-gradient(90deg, #f3f3f3 0%, #f3f3f3 62%, var(--navy) 62%, var(--navy) 100%);
+  padding: 18px 0 18px 18px;
   min-height: 170px;
+  box-sizing: border-box;
 }
 
 .brand-block {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
   flex: 1;
   min-width: 0;
+  padding: 8px 12px;
 }
 
 .brand-icon {
-  flex: 0 0 250px;
-  width: 250px;
-  height: 180px;
+  flex: 0 0 200px;
+  width: 200px;
+  height: 150px;
   background: transparent;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* transform: translateX(-30px); */
 }
 
 .brand-icon img {
@@ -154,7 +155,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3px;
+  gap: 4px;
   text-align: left;
   min-width: 0;
 }
@@ -164,21 +165,22 @@ body {
   font-weight: 900;
   letter-spacing: 1px;
   color: var(--navy);
-  font-size: clamp(2rem, 2.7vw, 3.4rem);
+  font-size: clamp(2.2rem, 2.8vw, 3.7rem);
   line-height: 1;
 }
 
 .brand-copy h2 {
   margin: 0;
   color: var(--navy);
-  font-size: clamp(1rem, 1.25vw, 1.6rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.9rem);
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .brand-copy h1:last-child {
   max-width: 100%;
-  font-size: clamp(1.35rem, 2vw, 2.4rem);
+  font-size: clamp(1.5rem, 2vw, 2.5rem);
   line-height: 1.1;
   overflow-wrap: anywhere;
 }
@@ -204,17 +206,18 @@ body {
 .header-quote {
   background: var(--navy);
   color: #fff;
-  padding: 18px 24px 12px 26px;
-  min-width: 330px;
-  flex: 0 1 330px;
+  padding: 28px 30px 18px 56px;
+  min-width: 360px;
+  flex: 0 1 400px;
   position: relative;
   margin-left: 15px;
   clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  box-sizing: border-box;
 }
 
 .header-quote h3 {
-  margin: 0 0 16px;
-  font-size: 2.1rem;
+  margin: 0 0 18px;
+  font-size: 2.4rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-align: center;
@@ -225,8 +228,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  font-size: 0.96rem;
-  margin-bottom: 8px;
+  font-size: 1.03rem;
+  margin-bottom: 10px;
   color: rgba(255, 255, 255, 0.95);
 }
 
