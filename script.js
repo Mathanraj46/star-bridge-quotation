@@ -168,44 +168,33 @@ downloadPdfBtn.addEventListener('click', async () => {
 
   const { jsPDF } = window.jspdf;
   const element = document.getElementById('quotation-sheet');
+  const pageShell = document.querySelector('.page-shell');
   const originalBodyBg = document.body.style.background;
   const originalBodyPadding = document.body.style.padding;
+  const originalBodyOverflow = document.body.style.overflow;
+  const originalShellBg = pageShell ? pageShell.style.background : '';
   const originalSheetBg = element.style.background;
 
+  document.body.style.background = '#ffffff';
+  document.body.style.padding = '0';
+  document.body.style.overflow = 'visible';
+  if (pageShell) pageShell.style.background = '#ffffff';
   element.style.background = '#ffffff';
   setPdfExportMode(true);
 
-  const exportRoot = element.cloneNode(true);
-  exportRoot.style.position = 'fixed';
-  exportRoot.style.left = '-99999px';
-  exportRoot.style.top = '0';
-  exportRoot.style.visibility = 'hidden';
-  exportRoot.style.pointerEvents = 'none';
-  exportRoot.style.background = '#ffffff';
-  exportRoot.classList.add('pdf-export-mode');
-  document.body.appendChild(exportRoot);
-
-  const exportInputs = exportRoot.querySelectorAll('input');
-  exportInputs.forEach((input) => {
-    const value = input.value || input.placeholder || '';
-    input.setAttribute('value', value);
-    input.value = value;
-    input.setAttribute('placeholder', input.placeholder || '');
-  });
-
   try {
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 80));
 
-    const canvas = await html2canvas(exportRoot, {
+    const canvas = await html2canvas(element, {
       scale: 2,
       backgroundColor: '#ffffff',
       useCORS: true,
       allowTaint: true,
       logging: false,
-      width: exportRoot.scrollWidth,
-      height: exportRoot.scrollHeight,
-      windowWidth: exportRoot.scrollWidth,
-      windowHeight: exportRoot.scrollHeight,
+      width: element.scrollWidth,
+      height: element.scrollHeight,
+      windowWidth: element.scrollWidth,
+      windowHeight: element.scrollHeight,
       scrollX: 0,
       scrollY: 0,
     });
@@ -238,10 +227,11 @@ downloadPdfBtn.addEventListener('click', async () => {
     console.error('PDF generation failed:', error);
     alert(`PDF download failed: ${error.message || 'Please try again.'}`);
   } finally {
-    exportRoot.remove();
     setPdfExportMode(false);
     document.body.style.background = originalBodyBg;
     document.body.style.padding = originalBodyPadding;
+    document.body.style.overflow = originalBodyOverflow;
+    if (pageShell) pageShell.style.background = originalShellBg;
     element.style.background = originalSheetBg;
   }
 });
