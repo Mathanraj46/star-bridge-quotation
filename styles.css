@@ -60,63 +60,6 @@ body {
   border: none !important;
 }
 
-.pdf-export-mode .top-header {
-  background: #f3f3f3 !important;
-  overflow: visible !important;
-  min-height: 120px !important;
-  padding: 0 !important;
-}
-
-.pdf-export-mode .header-quote {
-  clip-path: none !important;
-  padding: 12px 18px 10px 22px !important;
-  margin-left: 0 !important;
-  min-width: 260px !important;
-  flex: 0 0 38% !important;
-}
-
-.pdf-export-mode .brand-block {
-  padding: 8px 10px !important;
-  min-height: 120px !important;
-}
-
-.pdf-export-mode .brand-icon {
-  width: 88px !important;
-  height: 76px !important;
-  flex-basis: 88px !important;
-}
-
-.pdf-export-mode .brand-copy {
-  gap: 2px !important;
-}
-
-.pdf-export-mode .brand-copy h1 {
-  font-size: 24px !important;
-  line-height: 1.08 !important;
-  letter-spacing: 0.02em !important;
-}
-
-.pdf-export-mode .brand-copy h2 {
-  font-size: 11px !important;
-  letter-spacing: 1px !important;
-}
-
-.pdf-export-mode .brand-copy h1:last-child {
-  font-size: 16px !important;
-  line-height: 1.1 !important;
-}
-
-.pdf-export-mode .quote-meta {
-  gap: 10px !important;
-  margin-bottom: 6px !important;
-  font-size: 10px !important;
-}
-
-.pdf-export-mode .quote-meta-input {
-  width: 110px !important;
-  font-size: 10px !important;
-}
-
 .pdf-export-mode .brand-icon img,
 .pdf-export-mode .stamp-wrap img,
 .pdf-export-mode .signature-image {
@@ -164,7 +107,7 @@ body {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background: #ececec;
+  background: #f3f3f3;
   min-height: 170px;
   box-sizing: border-box;
   overflow: hidden;
@@ -176,15 +119,14 @@ body {
   gap: 18px;
   flex: 1 1 auto;
   min-width: 0;
-  padding: 18px 20px 18px 18px;
-  background: #f4f4f4;
-  min-height: 170px;
+  padding: 12px 18px 12px 18px;
+  background: #f3f3f3;
 }
 
 .brand-icon {
-  flex: 0 0 150px;
-  width: 150px;
-  height: 120px;
+  flex: 0 0 160px;
+  width: 160px;
+  height: 130px;
   background: transparent;
   position: relative;
   display: flex;
@@ -247,22 +189,22 @@ body {
   font-weight: 900;
   letter-spacing: 0.04em;
   color: var(--navy);
-  font-size: clamp(2.2rem, 3vw, 4.8rem);
+  font-size: clamp(2.3rem, 3.2vw, 5rem);
   line-height: 1;
 }
 
 .brand-copy h2 {
   margin: 0;
   color: var(--navy);
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: clamp(1.1rem, 1.5vw, 2.1rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .brand-copy h1:last-child {
   max-width: 100%;
-  font-size: clamp(1.3rem, 2vw, 2.6rem);
+  font-size: clamp(1.4rem, 2.1vw, 2.8rem);
   line-height: 1.1;
   overflow-wrap: anywhere;
   font-weight: 700;
@@ -290,9 +232,9 @@ body {
 .header-quote {
   background: var(--navy);
   color: #fff;
-  padding: 20px 28px 18px 52px;
-  min-width: 390px;
-  flex: 0 0 40%;
+  padding: 24px 30px 18px 54px;
+  min-width: 380px;
+  flex: 0 0 42%;
   position: relative;
   margin-left: 10px;
   clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -300,8 +242,8 @@ body {
 }
 
 .header-quote h3 {
-  margin: 0 0 20px;
-  font-size: clamp(2.3rem, 2.9vw, 4rem);
+  margin: 0 0 18px;
+  font-size: clamp(2.2rem, 2.8vw, 3.4rem);
   font-weight: 800;
   letter-spacing: 2px;
   text-align: center;
@@ -312,7 +254,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin-bottom: 10px;
   color: rgba(255, 255, 255, 0.96);
 }

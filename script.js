@@ -194,15 +194,28 @@ downloadPdfBtn.addEventListener('click', async () => {
     });
 
     const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth() - 12;
-    const pdfHeight = pdf.internal.pageSize.getHeight() - 12;
-    const ratio = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
-    const imgWidth = canvas.width * ratio;
-    const imgHeight = canvas.height * ratio;
-    const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
-    const y = (pdf.internal.pageSize.getHeight() - imgHeight) / 2;
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const pagePixelHeight = Math.max(1, Math.floor((pageHeight * canvas.width) / pdfWidth));
 
-    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', x, y, imgWidth, imgHeight, undefined, 'FAST');
+    for (let sourceY = 0, pageIndex = 0; sourceY < canvas.height; sourceY += pagePixelHeight, pageIndex += 1) {
+      const sliceHeight = Math.min(pagePixelHeight, canvas.height - sourceY);
+      const pageCanvas = document.createElement('canvas');
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = sliceHeight;
+      const pageContext = pageCanvas.getContext('2d');
+      pageContext.fillStyle = '#ffffff';
+      pageContext.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
+      pageContext.drawImage(canvas, 0, sourceY, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
+
+      if (pageIndex > 0) {
+        pdf.addPage();
+      }
+
+      const pageImageHeight = (sliceHeight * pdfWidth) / canvas.width;
+      pdf.addImage(pageCanvas.toDataURL('image/png'), 'PNG', 0, 0, pdfWidth, pageImageHeight, undefined, 'FAST');
+    }
+
     pdf.save('star-bridge-quotation.pdf');
   } catch (error) {
     console.error('PDF generation failed:', error);
