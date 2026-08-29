@@ -647,12 +647,13 @@ body {
   width: 100%;
 }
 
-.signature-name {
-  font-size: 2rem;
-  font-family: "Segoe Print", "Bradley Hand", cursive;
-  color: #0b2d52;
-  line-height: 1;
-  margin-bottom: 6px;
+.signature-image {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  margin: 0 auto 6px;
+  object-fit: contain;
 }
 
 .signature-label {
