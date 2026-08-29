@@ -96,7 +96,11 @@ body {
 .pdf-export-mode .stamp-wrap img,
 .pdf-export-mode .signature-image {
   display: block !important;
+  width: 100% !important;
+  height: 100% !important;
   max-width: none !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
