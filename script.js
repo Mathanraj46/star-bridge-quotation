@@ -19,6 +19,20 @@ const advanceInput = document.getElementById('advanceValue');
 
 function setPdfExportMode(isExporting) {
   document.body.classList.toggle('pdf-export-mode', isExporting);
+  document.body.style.background = isExporting ? '#ffffff' : '';
+  document.body.style.padding = isExporting ? '0' : '';
+  document.body.style.margin = isExporting ? '0' : '';
+
+  const sheet = document.querySelector('.quotation-sheet');
+  if (sheet) {
+    sheet.style.background = isExporting ? '#ffffff' : '';
+  }
+
+  const shell = document.querySelector('.page-shell');
+  if (shell) {
+    shell.style.background = isExporting ? '#ffffff' : '';
+    shell.style.boxShadow = isExporting ? 'none' : '';
+  }
 }
 
 function formatCurrency(value) {
@@ -154,12 +168,20 @@ downloadPdfBtn.addEventListener('click', async () => {
 
   const { jsPDF } = window.jspdf;
   const element = document.getElementById('quotation-sheet');
+  const originalBodyBg = document.body.style.background;
+  const originalBodyPadding = document.body.style.padding;
+  const originalSheetBg = element.style.background;
+
+  element.style.background = '#ffffff';
+  setPdfExportMode(true);
+
   const exportRoot = element.cloneNode(true);
   exportRoot.style.position = 'fixed';
   exportRoot.style.left = '-99999px';
   exportRoot.style.top = '0';
   exportRoot.style.visibility = 'hidden';
   exportRoot.style.pointerEvents = 'none';
+  exportRoot.style.background = '#ffffff';
   exportRoot.classList.add('pdf-export-mode');
   document.body.appendChild(exportRoot);
 
@@ -218,6 +240,9 @@ downloadPdfBtn.addEventListener('click', async () => {
   } finally {
     exportRoot.remove();
     setPdfExportMode(false);
+    document.body.style.background = originalBodyBg;
+    document.body.style.padding = originalBodyPadding;
+    element.style.background = originalSheetBg;
   }
 });
 
