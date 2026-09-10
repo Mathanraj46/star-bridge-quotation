@@ -168,6 +168,7 @@ downloadPdfBtn.addEventListener('click', async () => {
   const exportImages = [];
 
   setPdfExportMode(true);
+  let exportClone = null;
 
   try {
     await Promise.all([...element.querySelectorAll('img')].map((image) => {
@@ -185,28 +186,46 @@ downloadPdfBtn.addEventListener('click', async () => {
     element.style.overflow = 'visible';
     await new Promise((resolve) => requestAnimationFrame(resolve));
 
-    const elementTop = element.getBoundingClientRect().top;
-    const footer = element.querySelector('.footer-bar');
+    exportClone = element.cloneNode(true);
+    exportClone.removeAttribute('id');
+    exportClone.style.cssText = [
+      'position: absolute',
+      'left: -10000px',
+      'top: 0',
+      'width: 794px',
+      'height: auto',
+      'min-height: 0',
+      'overflow: visible',
+      'box-shadow: none',
+      'border: 0'
+    ].join(';');
+    document.body.appendChild(exportClone);
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+    const footer = exportClone.querySelector('.footer-bar');
     const footerBottom = footer
       ? footer.getBoundingClientRect().bottom
-      : element.getBoundingClientRect().bottom;
-    const captureHeight = Math.ceil(Math.max(element.scrollHeight, footerBottom - elementTop + 4));
-    element.style.height = `${captureHeight}px`;
+      : exportClone.getBoundingClientRect().bottom;
+    const captureHeight = Math.ceil(Math.max(
+      exportClone.scrollHeight,
+      footerBottom - exportClone.getBoundingClientRect().top + 4
+    ));
+    exportClone.style.height = `${captureHeight}px`;
 
-    const canvas = await html2canvas(element, {
+    const canvas = await html2canvas(exportClone, {
       scale: 2,
       backgroundColor: '#ffffff',
       useCORS: true,
       allowTaint: true,
       logging: false,
-      width: element.scrollWidth,
+      width: exportClone.scrollWidth,
       height: captureHeight,
-      windowWidth: element.scrollWidth,
+      windowWidth: exportClone.scrollWidth,
       windowHeight: captureHeight,
       scrollX: 0,
       scrollY: 0,
       onclone: (clonedDocument) => {
-        const clonedElement = clonedDocument.getElementById('quotation-sheet');
+        const clonedElement = clonedDocument.querySelector('.quotation-sheet');
         if (clonedElement) {
           clonedElement.style.height = `${captureHeight}px`;
           clonedElement.style.overflow = 'visible';
@@ -234,6 +253,7 @@ downloadPdfBtn.addEventListener('click', async () => {
     alert(`PDF download failed: ${error.message || 'Please try again.'}`);
   } finally {
     exportValues.forEach(({ input, text }) => text.replaceWith(input));
+    exportClone?.remove();
     element.style.height = originalHeight;
     element.style.overflow = originalOverflow;
     setPdfExportMode(false);
