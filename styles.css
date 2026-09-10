@@ -60,6 +60,9 @@ body {
   width: 794px !important;
   box-shadow: none !important;
   border: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
 }
 
 .pdf-export-mode .top-header {

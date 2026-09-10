@@ -177,7 +177,14 @@ downloadPdfBtn.addEventListener('click', async () => {
   setPdfExportMode(true);
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    await Promise.all([...element.querySelectorAll('img')].map((image) => {
+      if (image.complete) return Promise.resolve();
+      return new Promise((resolve) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+      });
+    }));
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
     const canvas = await html2canvas(element, {
       scale: 2,
@@ -186,9 +193,9 @@ downloadPdfBtn.addEventListener('click', async () => {
       allowTaint: true,
       logging: false,
       width: element.scrollWidth,
-      height: element.scrollHeight,
+      height: Math.max(element.scrollHeight, element.getBoundingClientRect().height),
       windowWidth: element.scrollWidth,
-      windowHeight: element.scrollHeight,
+      windowHeight: Math.max(element.scrollHeight, document.documentElement.scrollHeight),
       scrollX: 0,
       scrollY: 0,
     });
