@@ -155,9 +155,6 @@ downloadPdfBtn.addEventListener('click', async () => {
   const { jsPDF } = window.jspdf;
   const element = document.getElementById('quotation-sheet');
   const inputElements = [...element.querySelectorAll('input')];
-  const imageElements = window.location.protocol === 'file:'
-    ? [...element.querySelectorAll('img')]
-    : [];
   const exportValues = inputElements.map((input) => {
     const value = input.value || input.placeholder || '';
     const text = document.createElement('span');
@@ -166,13 +163,7 @@ downloadPdfBtn.addEventListener('click', async () => {
     input.replaceWith(text);
     return { input, text };
   });
-  const exportImages = imageElements.map((image) => {
-    const placeholder = document.createElement('span');
-    placeholder.className = 'export-image-placeholder';
-    placeholder.style.cssText = `display: block; width: ${image.clientWidth}px; height: ${image.clientHeight}px;`;
-    image.replaceWith(placeholder);
-    return { image, placeholder };
-  });
+  const exportImages = [];
 
   setPdfExportMode(true);
 
@@ -186,6 +177,12 @@ downloadPdfBtn.addEventListener('click', async () => {
     }));
     await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
+    const elementTop = element.getBoundingClientRect().top;
+    const contentBottom = Math.max(
+      ...[element, ...element.querySelectorAll('*')].map((node) => node.getBoundingClientRect().bottom)
+    );
+    const captureHeight = Math.ceil(Math.max(element.scrollHeight, contentBottom - elementTop));
+
     const canvas = await html2canvas(element, {
       scale: 2,
       backgroundColor: '#ffffff',
@@ -193,9 +190,9 @@ downloadPdfBtn.addEventListener('click', async () => {
       allowTaint: true,
       logging: false,
       width: element.scrollWidth,
-      height: Math.max(element.scrollHeight, element.getBoundingClientRect().height),
+      height: captureHeight,
       windowWidth: element.scrollWidth,
-      windowHeight: Math.max(element.scrollHeight, document.documentElement.scrollHeight),
+      windowHeight: captureHeight,
       scrollX: 0,
       scrollY: 0,
     });
@@ -219,7 +216,6 @@ downloadPdfBtn.addEventListener('click', async () => {
     console.error('PDF generation failed:', error);
     alert(`PDF download failed: ${error.message || 'Please try again.'}`);
   } finally {
-    exportImages.forEach(({ image, placeholder }) => placeholder.replaceWith(image));
     exportValues.forEach(({ input, text }) => text.replaceWith(input));
     setPdfExportMode(false);
   }
