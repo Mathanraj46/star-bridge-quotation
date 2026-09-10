@@ -202,6 +202,7 @@ body {
 .pdf-export-mode .signature-area {
   width: 250px !important;
   gap: 3px !important;
+  align-items: flex-end !important;
 }
 
 .pdf-export-mode .footer-bar {
@@ -836,7 +837,7 @@ body {
   width: 350px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
 }
 
@@ -848,6 +849,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
+  margin-left: auto;
 }
 
 .stamp-wrap img {
@@ -867,7 +869,7 @@ body {
   width: 100%;
   max-width: 220px;
   height: auto;
-  margin: 0 auto 6px;
+  margin: 0 0 6px auto;
   object-fit: contain;
 }
 
