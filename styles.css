@@ -52,10 +52,12 @@ body {
 }
 
 .pdf-export-mode .page-shell {
-  width: 100% !important;
+  width: 794px !important;
+  max-width: 794px !important;
 }
 
 .pdf-export-mode .quotation-sheet {
+  width: 794px !important;
   box-shadow: none !important;
   border: none !important;
 }
