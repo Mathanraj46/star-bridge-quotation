@@ -117,6 +117,93 @@ body {
   font-size: 10px !important;
 }
 
+.pdf-export-mode .info-row {
+  padding: 8px 20px 2px !important;
+}
+
+.pdf-export-mode .contact-card {
+  gap: 5px !important;
+  padding: 4px 6px !important;
+  font-size: 0.9rem !important;
+}
+
+.pdf-export-mode .client-section {
+  padding: 6px 20px 4px !important;
+}
+
+.pdf-export-mode .client-name {
+  margin-top: 3px !important;
+  padding-bottom: 6px !important;
+  font-size: 1.35rem !important;
+}
+
+.pdf-export-mode .client-meta {
+  gap: 4px !important;
+  padding-top: 5px !important;
+}
+
+.pdf-export-mode .meta-row,
+.pdf-export-mode .client-meta .export-input-value {
+  font-size: 0.95rem !important;
+}
+
+.pdf-export-mode .estimate-table-wrap {
+  padding: 0 14px !important;
+}
+
+.pdf-export-mode .totals-area {
+  padding: 8px 20px 4px !important;
+  gap: 14px !important;
+}
+
+.pdf-export-mode .total-line {
+  font-size: 0.95rem !important;
+}
+
+.pdf-export-mode .total-line strong {
+  font-size: 0.85rem !important;
+}
+
+.pdf-export-mode .amount-box {
+  min-width: 330px !important;
+}
+
+.pdf-export-mode .amount-row {
+  padding: 7px 10px !important;
+  font-size: 0.9rem !important;
+}
+
+.pdf-export-mode .bottom-section {
+  padding: 10px 20px 12px !important;
+  gap: 14px !important;
+}
+
+.pdf-export-mode .terms-area h4 {
+  margin-bottom: 5px !important;
+  font-size: 0.95rem !important;
+}
+
+.pdf-export-mode .terms-area ul {
+  line-height: 1.35 !important;
+  font-size: 0.85rem !important;
+}
+
+.pdf-export-mode .stamp-wrap {
+  width: 110px !important;
+  height: 110px !important;
+  margin-bottom: 2px !important;
+}
+
+.pdf-export-mode .signature-area {
+  width: 250px !important;
+  gap: 3px !important;
+}
+
+.pdf-export-mode .footer-bar {
+  padding: 9px 12px !important;
+  font-size: 0.85rem !important;
+}
+
 .pdf-export-mode .brand-icon img,
 .pdf-export-mode .stamp-wrap img,
 .pdf-export-mode .signature-image {
@@ -157,6 +244,42 @@ body {
   color: var(--text);
   font-size: 0.96rem;
   text-align: center;
+}
+
+.pdf-export-mode .export-input-value {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.pdf-export-mode .estimate-table {
+  table-layout: fixed;
+}
+
+.pdf-export-mode .estimate-table th,
+.pdf-export-mode .estimate-table td {
+  padding: 7px 6px;
+  font-size: 1rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.pdf-export-mode .estimate-table thead th {
+  padding: 9px 6px;
+  font-size: 1.05rem;
+}
+
+.pdf-export-mode .estimate-table .export-input-value {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.25;
+  padding: 3px 4px;
+  font-size: 1rem;
+}
+
+.pdf-export-mode .estimate-table td:nth-child(2) .export-input-value {
+  text-align: left;
 }
 
 .top-header {
