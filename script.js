@@ -125,6 +125,8 @@ function renumberRows() {
   });
 }
 
+  let originalHeight = '';
+  let originalOverflow = '';
 function addNewRow() {
   tableBody.appendChild(createRowItem({ description: '', qty: 1, rate: 0 }));
   renumberRows();
@@ -177,11 +179,19 @@ downloadPdfBtn.addEventListener('click', async () => {
     }));
     await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
+    originalHeight = element.style.height;
+    originalOverflow = element.style.overflow;
+    element.style.height = 'auto';
+    element.style.overflow = 'visible';
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+
     const elementTop = element.getBoundingClientRect().top;
-    const contentBottom = Math.max(
-      ...[element, ...element.querySelectorAll('*')].map((node) => node.getBoundingClientRect().bottom)
-    );
-    const captureHeight = Math.ceil(Math.max(element.scrollHeight, contentBottom - elementTop));
+    const footer = element.querySelector('.footer-bar');
+    const footerBottom = footer
+      ? footer.getBoundingClientRect().bottom
+      : element.getBoundingClientRect().bottom;
+    const captureHeight = Math.ceil(Math.max(element.scrollHeight, footerBottom - elementTop + 4));
+    element.style.height = `${captureHeight}px`;
 
     const canvas = await html2canvas(element, {
       scale: 2,
@@ -195,6 +205,13 @@ downloadPdfBtn.addEventListener('click', async () => {
       windowHeight: captureHeight,
       scrollX: 0,
       scrollY: 0,
+      onclone: (clonedDocument) => {
+        const clonedElement = clonedDocument.getElementById('quotation-sheet');
+        if (clonedElement) {
+          clonedElement.style.height = `${captureHeight}px`;
+          clonedElement.style.overflow = 'visible';
+        }
+      },
     });
 
     const pdf = new jsPDF('p', 'mm', 'a4');
@@ -217,6 +234,8 @@ downloadPdfBtn.addEventListener('click', async () => {
     alert(`PDF download failed: ${error.message || 'Please try again.'}`);
   } finally {
     exportValues.forEach(({ input, text }) => text.replaceWith(input));
+    element.style.height = originalHeight;
+    element.style.overflow = originalOverflow;
     setPdfExportMode(false);
   }
 });
