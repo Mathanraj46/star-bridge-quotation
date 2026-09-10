@@ -202,14 +202,12 @@ downloadPdfBtn.addEventListener('click', async () => {
     document.body.appendChild(exportClone);
     await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
+    const cloneTop = exportClone.getBoundingClientRect().top;
     const footer = exportClone.querySelector('.footer-bar');
     const footerBottom = footer
       ? footer.getBoundingClientRect().bottom
       : exportClone.getBoundingClientRect().bottom;
-    const captureHeight = Math.ceil(Math.max(
-      exportClone.scrollHeight,
-      footerBottom - exportClone.getBoundingClientRect().top + 4
-    ));
+    const captureHeight = Math.ceil(footerBottom - cloneTop + 4);
     exportClone.style.height = `${captureHeight}px`;
 
     const canvas = await html2canvas(exportClone, {
