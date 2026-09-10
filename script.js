@@ -196,13 +196,13 @@ downloadPdfBtn.addEventListener('click', async () => {
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const pdfWidth = pageWidth - 10;
-    const pdfHeight = pageHeight - 10;
+    const pdfWidth = pageWidth - 6;
+    const pdfHeight = pageHeight - 6;
     const ratio = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
     const imgWidth = canvas.width * ratio;
     const imgHeight = canvas.height * ratio;
     const x = (pageWidth - imgWidth) / 2;
-    const y = 5;
+    const y = 0;
 
     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', x, y, imgWidth, imgHeight, undefined, 'FAST');
     pdf.save('star-bridge-quotation.pdf');
