@@ -179,10 +179,12 @@ body {
 }
 
 .pdf-export-mode .bottom-section {
+  position: relative !important;
   display: flex !important;
   flex-direction: row !important;
   align-items: flex-end !important;
   justify-content: space-between !important;
+  min-height: 270px !important;
   padding: 10px 20px 12px !important;
   gap: 14px !important;
 }
@@ -204,8 +206,11 @@ body {
 }
 
 .pdf-export-mode .signature-area {
+  position: absolute !important;
+  top: 10px !important;
+  right: 20px !important;
   width: 250px !important;
-  margin: 0 0 0 auto !important;
+  margin: 0 !important;
   gap: 3px !important;
   align-items: flex-end !important;
 }
