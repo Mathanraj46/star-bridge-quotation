@@ -208,7 +208,7 @@ downloadPdfBtn.addEventListener('click', async () => {
       : exportClone.getBoundingClientRect().bottom;
     const captureHeight = Math.ceil(Math.max(
       exportClone.scrollHeight,
-      footerBottom - exportClone.getBoundingClientRect().top + 260
+      footerBottom - exportClone.getBoundingClientRect().top + 4
     ));
     exportClone.style.height = `${captureHeight}px`;
 
